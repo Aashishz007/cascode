@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title> Validate Survey Form</title>
+    <link rel="stylesheet" href="styles.css">
+    <script>
+        function validateForm() {
+            // get form inputs
+            var name = document.getElementById('name').value.trim();
+            var email = document.getElementById('email').value.trim();
+            var gender = document.getElementById('gender').value.trim();
+            var age = document.getElementById('age').value.trim();
+            var feedback = document.getElementById('feedback').value.trim();
+            var rating = document.getElementById('rating').value.trim();
+            var recommend = document.querySelector('input[name="recommend"]:checked');
+
+            // check if name is empty and contains only letters
+            if (name == '') {
+                document.getElementById('name-error').innerHTML = 'Name is required';
+                return false;
+            } else if (!/^[a-zA-Z]+$/.test(name)) {
+                document.getElementById('name-error').innerHTML = 'Name should contain letters only';
+                return false;
+            } else {
+                document.getElementById('name-error').innerHTML = '';
+            }
+
+            // check if email is valid
+            if (email == '') {
+                document.getElementById('email-error').innerHTML = 'Email is required';
+                return false;
+            } else if (!/\S+@\S+\.\S+/.test(email)) {
+                document.getElementById('email-error').innerHTML = 'Email is invalid';
+                return false;
+            } else {
+                document.getElementById('email-error').innerHTML = '';
+            }
+
+            // check if gender is selected
+            if (gender == '') {
+                document.getElementById('gender-error').innerHTML = 'Gender is required';
+                return false;
+            } else {
+                document.getElementById('gender-error').innerHTML = '';
+            }
+
+            // check if age is not negative
+            if (age == '') {
+                document.getElementById('age-error').innerHTML = 'Age is required';
+                return false;
+            } else if (age < 0) {
+                document.getElementById('age-error').innerHTML = 'Age cannot be negative';
+                return false;
+            } else {
+                document.getElementById('age-error').innerHTML = '';
+            }
+
+            // check if feedback is not empty
+            if (feedback == '') {
+                document.getElementById('feedback-error').innerHTML = 'Feedback is required';
+                return false;
+            } else {
+                document.getElementById('feedback-error').innerHTML = '';
+            }
+
+            // check if rating is selected
+            if (rating == '') {
+                document.getElementById('rating-error').innerHTML = 'Rating is required';
+                return false;
+            } else {
+                document.getElementById('rating-error').innerHTML = '';
+            }
+
+            // check if recommendation is selected
+            if (!recommend) {
+                document.getElementById('recommend-error').innerHTML = 'Recommendation is required';
+                return false;
+            } else {
+                document.getElementById('recommend-error').innerHTML = '';
+            }
+
+            // form is valid, submit the form
+            return true;
+        }
+
+    </script>
+</head>
+
+<body>
+    <div class="survey-container">
+        <h1>Validate Survey Form</h1>
+        <form onsubmit="return validateForm()">
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="name">
+            <div id="name-error" class="error"></div>
+
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email">
+            <div id="email-error" class="error"></div>
+
+            <label for="gender">Gender:</label>
+            <select id="gender" name="gender">
+                <option value="">Please select</option>
+                <option value="male">Male</option>
+                <option value="female">Female</option>
+                <option value="other">Other</option>
+            </select>
+            <div id="gender-error" class="error"></div>
+
+            <label for="age">Age:</label>
+            <input type="number" id="age" name="age">
+            <div id="age-error" class="error"></div>
+
+            <label for="feedback">What did you think of our website?</label>
+            <textarea id="feedback" name="feedback"></textarea>
+            <div id="feedback-error" class="error"></div>
+
+            <label for="rating">How would you rate our website?</label>
+            <select id="rating" name="rating">
+                <option value="">Please select</option>
+                <option value="excellent">Excellent</option>
+                <option value="good">Good</option>
+                <option value="fair">Fair</option>
+                <option value="poor">Poor</option>
+            </select>
+            <div id="rating-error" class="error"></div>
+
+            <label for="recommend">Would you recommend our website?</label>
+            <label><input type="radio" name="recommend" value="yes">Yes</label>
+            <label><input type="radio" name="recommend" value="no">No</label>
+            <div id="recommend-error" class="error"></div>
+
+            <input type="submit" value="Submit">
+        </form>
+    </div>
+</body>
+
+</html>
